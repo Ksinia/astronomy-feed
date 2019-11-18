@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../style/style.css";
 
 export default class Element extends Component {
   render() {
