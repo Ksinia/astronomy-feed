@@ -9,7 +9,7 @@ export default class Element extends Component {
         <h3 className="title">{this.props.title}</h3>
         <img className="picture" src={this.props.imgsrc}></img>
         <p className="description">{this.props.description}</p>
-        <div className="likes">Likes will be here someday</div>
+        <div className="likes">{this.props.children}</div>
       </div>
     );
   }
