@@ -13,29 +13,42 @@ class App extends React.Component {
       images: []
     };
   }
+  addLike = index => {
+    let img = this.state.images.slice();
+    img[index].likes += 1;
+    this.setState({
+      ...this.state,
+      images: img
+    });
+  };
   async fetchImages(arrayOfDates) {
     const promises = arrayOfDates.map(date => {
-      const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`
-      return fetch(url).then((res) => res.json())
-    })
+      const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`;
+      return fetch(url).then(res => res.json());
+    });
 
     // https://api.nasa.gov/planetary/apod\?api_key\=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg\&start_date\=2019-11-11\&end_date\=2019-11-15
 
-    const data = await Promise.all(promises)
-    console.log(data)
+    const data = await Promise.all(promises);
+    console.log(data);
     this.setState({
       images: [
         ...this.state.images,
         ...data.map(dailyPicture => {
-          return { ...dailyPicture, likes: 0, comments: [] }
-        })]
-    })
+          return { ...dailyPicture, likes: 0, comments: [] };
+        })
+      ]
+    });
   }
   componentDidMount() {
-    const initialDates = Array(5).fill(null).map((date, index) => {
-      return moment().subtract(index, "days").format("YYYY-MM-DD");
-    });
-    this.fetchImages(initialDates)
+    const initialDates = Array(5)
+      .fill(null)
+      .map((date, index) => {
+        return moment()
+          .subtract(index, "days")
+          .format("YYYY-MM-DD");
+      });
+    this.fetchImages(initialDates);
   }
   render() {
     return (
@@ -45,13 +58,26 @@ class App extends React.Component {
           <section>
             <div id="leftpanel">Left panel</div>
             <div className="feed">
-              <Page pagenumber="Page 1 of 2">
-                {this.state.images.map(image => {
-                  return <Element key={image.date} imgsrc={(image.media_type === "image") ? image.url : 'https://s23527.pcdn.co/wp-content/uploads/2017/04/nasa-gallery.jpg.optimal.jpg'} title={image.title} date={image.date} description={image.explanation}>
-                    <LikeAndComment />
+              {this.state.images.map((image, index) => {
+                return (
+                  <Element
+                    key={image.date}
+                    imgsrc={
+                      image.media_type === "image"
+                        ? image.url
+                        : "https://s23527.pcdn.co/wp-content/uploads/2017/04/nasa-gallery.jpg.optimal.jpg"
+                    }
+                    title={image.title}
+                    date={image.date}
+                    description={image.explanation}
+                  >
+                    <LikeAndComment
+                      onClick={() => this.addLike(index)}
+                      likes={image.likes}
+                    />
                   </Element>
-                })}
-              </Page>
+                );
+              })}
             </div>
           </section>
           <footer>Some footer</footer>
