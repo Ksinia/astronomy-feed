@@ -1,19 +1,23 @@
 .element {
-  border-bottom: 1px;
+  border: 0.5px solid gray;
+  border-radius: 3px;
+  margin-bottom: 1rem;
 }
 
 .picture {
-  max-width: 80%;
+  max-width: 100%;
   display: block;
   margin: auto;
+  border-radius: 3px;
 }
 
 .description,
 .title,
 .date,
 .likes {
-  max-width: 65%;
+  max-width: 90%;
   margin: auto;
+  border-radius: 3px;
 }
 
 .date {
@@ -29,11 +33,20 @@
   margin-top: 20px;
   margin-bottom: 15px;
   text-align: justify;
-  border: 5px gray groove;
+  /* border: 5px gray groove;
   /* box-shadow: 5px 5px 5px 5px; */
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .likes {
+  max-width: 90%;
   margin-bottom: 30px;
+  /* padding: 10px; */
+}
+.pictureAndText {
+  max-width: 90%;
+  margin: 0.2rem auto;
+  background: whitesmoke;
+  border: 0.5px solid gray;
+  border-radius: 3px;
 }

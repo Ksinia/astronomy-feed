@@ -1,33 +1,45 @@
-#comments {
+/* #comments {
   margin-top: 1rem;
-}
+} */
 .comment,
 form {
   border: 0.5px solid gray;
-  border-radius: 5px;
-  max-width: 50%;
-  margin: 1rem auto;
+  border-radius: 3px;
+  /* max-width: 50%; */
+  margin: 1rem;
+  background: whitesmoke;
 }
 
 input,
 textarea {
   border: 0.5px solid gray;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 1rem;
-  width: 70%;
+  /* width: 70%; */
 }
 
-.formSection {
+/* .formSection {
   margin: 1rem auto;
-}
+} */
 label {
   display: block;
 }
 button {
   color: white;
-  background: #ffba00;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 5px;
-  font-size: 120%;
+  /* background: #ffba00; */
+  background: darkblue;
+  padding: 0.5em;
+  margin: 1em;
+  border-radius: 3px;
+  font-size: 110%;
+}
+.existing-reactions {
+  background: lightgray;
+  border: 0.5px solid gray;
+  border-radius: 3px;
+}
+.add-reactions {
+  margin-top: 1rem;
+  border: 0.5px solid gray;
+  border-radius: 3px;
 }
