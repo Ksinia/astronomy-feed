@@ -1,35 +1,46 @@
 import React, { Component } from "react";
 import "./LikeAndComment.css";
+import Comment from "./Comment";
 
 export default class LikeAndComment extends Component {
-  handleLikeClick = () => {
-    console.log("hello 2");
+  state = {
+    numLikes: 0,
+    comments: [
+      { name: "Mitya", msg: "I like it" },
+      { name: "Ksenia", msg: "Nice" }
+    ]
   };
+
+  //   submitComment = event => {
+  //     event.preventDefault();
+  //     const data = new FormData(event.target);
+  //     console.log(data);
+  //   };
+
   render() {
     return (
       <div className="reactions">
-        <div className="existing-reactions">
-          <div className="likes">36 likes</div>
-          <div className="comments">
-            <h4>Comments</h4>
-            <div className="comment">
-              <h5>Mitya said:</h5>
-              <p>"This is definitely one of my favorites!"</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="add-reactions">
-          <button className="likebutton" onClick={this.handleLikeClick}>
+        <div className="likesAndAdd">
+          <button className="likebutton" onClick={this.props.onClick}>
             Like!
           </button>
-          <form onsubmit="submitComment(); return false">
+          <h3 className="likes">{this.props.likes} likes</h3>
+        </div>
+        <div className="commentsAndAdd">
+          <div className="comments">
+            <h4>Comments:</h4>
+            {this.state.comments.map(comment => {
+              return <Comment name={comment.name} msg={comment.msg} />;
+            })}
+          </div>
+
+          <form onSubmit={this.submitComment}>
             <div className="formSection">
-              <label for="name">Name:</label>
+              <label htmlFor="name">Name:</label>
               <input type="text" id="name" />
             </div>
             <div className="formSection">
-              <label for="msg">Comment:</label>
+              <label htmlFor="msg">Comment:</label>
               <textarea id="msg"></textarea>
             </div>
             <div className="button">

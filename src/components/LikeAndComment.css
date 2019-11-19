@@ -1,33 +1,43 @@
-#comments {
+/* #comments {
   margin-top: 1rem;
-}
+} */
 .comment,
 form {
   border: 0.5px solid gray;
-  border-radius: 5px;
-  max-width: 50%;
-  margin: 1rem auto;
+  border-radius: 3px;
+  /* max-width: 50%; */
+  margin: 1rem;
+  background: whitesmoke;
 }
 
 input,
 textarea {
   border: 0.5px solid gray;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 1rem;
-  width: 70%;
+  /* width: 70%; */
 }
 
-.formSection {
+/* .formSection {
   margin: 1rem auto;
-}
+} */
 label {
   display: block;
 }
 button {
   color: white;
-  background: #ffba00;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 5px;
-  font-size: 120%;
+  background: darkblue;
+  padding: 0.2em 0.5em;
+  align-self: left;
+  border-radius: 3px;
+  font-size: 110%;
+}
+
+.likesAndAdd {
+  display: flex;
+  flex-direction: row;
+}
+
+.likes {
+  margin: auto 2rem;
 }
