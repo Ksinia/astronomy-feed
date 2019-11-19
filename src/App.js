@@ -4,63 +4,61 @@ import "./App.css";
 import Element from "./components/Element";
 import Page from "./components/Page";
 import LikeAndComment from "./components/LikeAndComment";
+import moment from "moment";
 
-function App() {
-  return (
-    <div className="App">
-      <main>
-        <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
-        <section>
-          <div id="leftpanel">Left panel</div>
-          <div className="feed">
-            <Page pagenumber="Page 1 of 2">
-              <Element
-                imgsrc="https://apod.nasa.gov/apod/image/1804/Ring_HubbleDonatiello_960.jpg"
-                title="M57: The Ring Nebula"
-                date="2018-04-17"
-                description="Except for the rings of Saturn, the Ring Nebula (M57) is probably the most famous celestial band. Its classic appearance is understood to be due to our own perspective, though. The recent mapping of the expanding nebula's 3-D structure, based in part on this clear Hubble image,indicates that the nebula is a relatively dense, donut-like ring wrapped around the middle of a (American) football-shaped cloud of glowing gas. The view from planet Earth looks down the long axis of the football, face-on to the ring. Of course, in this well-studied example of a planetary nebula, the glowing material does not come from planets. Instead, the gaseous shroud represents outer layers expelled from the dying, once sun-like star, now a tiny pinprick of light seen at the nebula's center. Intense ultraviolet light from the hot central star ionizes atoms in the gas. The Ring Nebula is about one light-year across and 2,000 light-years away."
-              >
-                <LikeAndComment />
-              </Element>
-              <Element
-                imgsrc="https://apod.nasa.gov/apod/image/1804/Ring_HubbleDonatiello_960.jpg"
-                title="M57: The Ring Nebula"
-                date="2018-04-17"
-                description="Except for the rings of Saturn, the Ring Nebula (M57) is probably the most famous celestial band. Its classic appearance is understood to be due to our own perspective, though. The recent mapping of the expanding nebula's 3-D structure, based in part on this clear Hubble image,indicates that the nebula is a relatively dense, donut-like ring wrapped around the middle of a (American) football-shaped cloud of glowing gas. The view from planet Earth looks down the long axis of the football, face-on to the ring. Of course, in this well-studied example of a planetary nebula, the glowing material does not come from planets. Instead, the gaseous shroud represents outer layers expelled from the dying, once sun-like star, now a tiny pinprick of light seen at the nebula's center. Intense ultraviolet light from the hot central star ionizes atoms in the gas. The Ring Nebula is about one light-year across and 2,000 light-years away."
-              >
-                <LikeAndComment />
-              </Element>
-              <Element
-                imgsrc="https://apod.nasa.gov/apod/image/1804/Ring_HubbleDonatiello_960.jpg"
-                title="M57: The Ring Nebula"
-                date="2018-04-17"
-                description="Except for the rings of Saturn, the Ring Nebula (M57) is probably the most famous celestial band. Its classic appearance is understood to be due to our own perspective, though. The recent mapping of the expanding nebula's 3-D structure, based in part on this clear Hubble image,indicates that the nebula is a relatively dense, donut-like ring wrapped around the middle of a (American) football-shaped cloud of glowing gas. The view from planet Earth looks down the long axis of the football, face-on to the ring. Of course, in this well-studied example of a planetary nebula, the glowing material does not come from planets. Instead, the gaseous shroud represents outer layers expelled from the dying, once sun-like star, now a tiny pinprick of light seen at the nebula's center. Intense ultraviolet light from the hot central star ionizes atoms in the gas. The Ring Nebula is about one light-year across and 2,000 light-years away."
-              >
-                <LikeAndComment />
-              </Element>
-              <Element
-                imgsrc="https://apod.nasa.gov/apod/image/1804/Ring_HubbleDonatiello_960.jpg"
-                title="M57: The Ring Nebula"
-                date="2018-04-17"
-                description="Except for the rings of Saturn, the Ring Nebula (M57) is probably the most famous celestial band. Its classic appearance is understood to be due to our own perspective, though. The recent mapping of the expanding nebula's 3-D structure, based in part on this clear Hubble image,indicates that the nebula is a relatively dense, donut-like ring wrapped around the middle of a (American) football-shaped cloud of glowing gas. The view from planet Earth looks down the long axis of the football, face-on to the ring. Of course, in this well-studied example of a planetary nebula, the glowing material does not come from planets. Instead, the gaseous shroud represents outer layers expelled from the dying, once sun-like star, now a tiny pinprick of light seen at the nebula's center. Intense ultraviolet light from the hot central star ionizes atoms in the gas. The Ring Nebula is about one light-year across and 2,000 light-years away."
-              >
-                <LikeAndComment />
-              </Element>
-              <Element
-                imgsrc="https://apod.nasa.gov/apod/image/1804/Ring_HubbleDonatiello_960.jpg"
-                title="M57: The Ring Nebula"
-                date="2018-04-17"
-                description="Except for the rings of Saturn, the Ring Nebula (M57) is probably the most famous celestial band. Its classic appearance is understood to be due to our own perspective, though. The recent mapping of the expanding nebula's 3-D structure, based in part on this clear Hubble image,indicates that the nebula is a relatively dense, donut-like ring wrapped around the middle of a (American) football-shaped cloud of glowing gas. The view from planet Earth looks down the long axis of the football, face-on to the ring. Of course, in this well-studied example of a planetary nebula, the glowing material does not come from planets. Instead, the gaseous shroud represents outer layers expelled from the dying, once sun-like star, now a tiny pinprick of light seen at the nebula's center. Intense ultraviolet light from the hot central star ionizes atoms in the gas. The Ring Nebula is about one light-year across and 2,000 light-years away."
-              >
-                <LikeAndComment />
-              </Element>
-            </Page>
-          </div>
-        </section>
-        <footer>Some footer</footer>
-      </main>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      images: []
+    };
+  }
+  async fetchImages(arrayOfDates) {
+    const promises = arrayOfDates.map(date => {
+      const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`
+      return fetch(url).then((res) => res.json())
+    })
+
+    // https://api.nasa.gov/planetary/apod\?api_key\=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg\&start_date\=2019-11-11\&end_date\=2019-11-15
+
+    const data = await Promise.all(promises)
+    console.log(data)
+    this.setState({
+      images: [
+        ...this.state.images,
+        ...data.map(dailyPicture => {
+          return { ...dailyPicture, likes: 0, comments: [] }
+        })]
+    })
+  }
+  componentDidMount() {
+    const initialDates = Array(5).fill(null).map((date, index) => {
+      return moment().subtract(index, "days").format("YYYY-MM-DD");
+    });
+    this.fetchImages(initialDates)
+  }
+  render() {
+    return (
+      <div className="App">
+        <main>
+          <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
+          <section>
+            <div id="leftpanel">Left panel</div>
+            <div className="feed">
+              <Page pagenumber="Page 1 of 2">
+                {this.state.images.map(image => {
+                  return <Element key={image.date} imgsrc={(image.media_type === "image") ? image.url : 'https://s23527.pcdn.co/wp-content/uploads/2017/04/nasa-gallery.jpg.optimal.jpg'} title={image.title} date={image.date} description={image.explanation}>
+                    <LikeAndComment />
+                  </Element>
+                })}
+              </Page>
+            </div>
+          </section>
+          <footer>Some footer</footer>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
