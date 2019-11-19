@@ -1,5 +1,23 @@
 .App {
   text-align: center;
+  font-family: "Crimson Text", serif;
+}
+
+.feed {
+  margin-top: 10vh;
+  border: 1px black solid;
+  width: 60%;
+  text-align: center;
+  display: inline-block;
+}
+
+#mainheader {
+  position: fixed;
+  height: 10vh;
+  background-color: white;
+  text-align: center;
+  margin: 0;
+  width: 100%;
 }
 
 /* .App-logo {
