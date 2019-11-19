@@ -21,10 +21,10 @@ export default class LikeAndComment extends Component {
     return (
       <div className="reactions">
         <div className="likesAndAdd">
-          <div className="likes">{this.props.likes} likes</div>
           <button className="likebutton" onClick={this.props.onClick}>
             Like!
           </button>
+          <h3 className="likes">{this.props.likes} likes</h3>
         </div>
         <div className="commentsAndAdd">
           <div className="comments">
@@ -36,11 +36,11 @@ export default class LikeAndComment extends Component {
 
           <form onSubmit={this.submitComment}>
             <div className="formSection">
-              <label for="name">Name:</label>
+              <label htmlFor="name">Name:</label>
               <input type="text" id="name" />
             </div>
             <div className="formSection">
-              <label for="msg">Comment:</label>
+              <label htmlFor="msg">Comment:</label>
               <textarea id="msg"></textarea>
             </div>
             <div className="button">

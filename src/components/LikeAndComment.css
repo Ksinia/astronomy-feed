@@ -26,20 +26,18 @@ label {
 }
 button {
   color: white;
-  /* background: #ffba00; */
   background: darkblue;
-  padding: 0.5em;
-  margin: 1em;
+  padding: 0.2em 0.5em;
+  align-self: left;
   border-radius: 3px;
   font-size: 110%;
 }
-.existing-reactions {
-  background: lightgray;
-  border: 0.5px solid gray;
-  border-radius: 3px;
+
+.likesAndAdd {
+  display: flex;
+  flex-direction: row;
 }
-.add-reactions {
-  margin-top: 1rem;
-  border: 0.5px solid gray;
-  border-radius: 3px;
+
+.likes {
+  margin: auto 2rem;
 }
