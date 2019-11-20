@@ -62,11 +62,8 @@ class App extends React.Component {
                 return (
                   <Element
                     key={image.date}
-                    imgsrc={
-                      image.media_type === "image"
-                        ? image.url
-                        : "https://s23527.pcdn.co/wp-content/uploads/2017/04/nasa-gallery.jpg.optimal.jpg"
-                    }
+                    mediaType={image.media_type}
+                    mediasrc={image.url}
                     title={image.title}
                     date={image.date}
                     description={image.explanation}
