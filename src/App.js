@@ -40,6 +40,27 @@ class App extends React.Component {
       ]
     });
   }
+  async updateCommentsAndLikes() {
+    const res = await fetch("http://localhost:3004/images")
+    const data = await res.json()
+    const oldState = [...this.state.images]
+    this.setState({
+      images: oldState.map(dailyPicture => {
+        const dateArray = data.map(comment => comment['imgDate'])
+        const index = dateArray.indexOf(dailyPicture['date'])
+        // console.log('comments in the state:', dailyPicture.comments)
+        // console.log('the current comment', data[index]['comments'])
+        // console.log('concat strings', dailyPicture.comments.concat(data[index]['comments']))
+        const likes = (index == -1) ? dailyPicture.likes : data[index]['numberOfLikes']
+        const comments = (index == -1) ? dailyPicture.comments : dailyPicture.comments.concat(data[index]['comments'])
+        return { ...dailyPicture, likes, comments }
+      })
+    })
+  }
+  async fillerAsyncFunction(initialDates) {
+    await this.fetchImages(initialDates);
+    await this.updateCommentsAndLikes()
+  }
   componentDidMount() {
     const initialDates = Array(5)
       .fill(null)
@@ -48,7 +69,7 @@ class App extends React.Component {
           .subtract(index, "days")
           .format("YYYY-MM-DD");
       });
-    this.fetchImages(initialDates);
+    this.fillerAsyncFunction(initialDates)
   }
   render() {
     return (
