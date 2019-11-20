@@ -1,0 +1,40 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "numberOfLikes": 0,
+      "comments": [],
+      "imgDate": "YYYY-MM-DD"
+    },
+    {
+      "id": 2,
+      "numberOfLikes": 3,
+      "comments": [
+        {
+          "author": "someone",
+          "message": "this is a comment for the picture 2019-11-20"
+        },
+        {
+          "author": "someone else",
+          "message": "this image should have 3 likes"
+        }
+      ],
+      "imgDate": "2019-11-20"
+    },
+    {
+      "id": 3,
+      "numberOfLikes": 5,
+      "comments": [
+        {
+          "author": "someone",
+          "message": "this is a comment for the picture 2019-11-19"
+        },
+        {
+          "author": "someone else",
+          "message": "this image should have 5 likes"
+        }
+      ],
+      "imgDate": "2019-11-19"
+    }
+  ]
+}
