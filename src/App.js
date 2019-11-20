@@ -100,6 +100,7 @@ class App extends React.Component {
                       addLike={this.addLike}
                       id={image.date}
                       likes={image.likes}
+                      comments={image.comments}
                     />
                   </Element>
                 );

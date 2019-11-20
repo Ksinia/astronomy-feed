@@ -35,6 +35,9 @@ export default class LikeAndComment extends Component {
             {this.state.comments.map(comment => {
               return <Comment name={comment.name} msg={comment.msg} />;
             })}
+            {this.props.comments.map(comment => {
+              return <Comment name={comment.author} msg={comment.message} />;
+            })}
           </div>
 
           <form onSubmit={this.submitComment}>
