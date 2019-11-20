@@ -16,12 +16,15 @@ export default class LikeAndComment extends Component {
   //     const data = new FormData(event.target);
   //     console.log(data);
   //   };
-
+  likeClick = () => {
+    this.props.addLike(this.props.id);
+  };
   render() {
+    console.log("passed id in the render function", this.props.id);
     return (
       <div className="reactions">
         <div className="likesAndAdd">
-          <button className="likebutton" onClick={this.props.onClick}>
+          <button className="likebutton" onClick={this.likeClick}>
             Like!
           </button>
           <h3 className="likes">{this.props.likes} likes</h3>

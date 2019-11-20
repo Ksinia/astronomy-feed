@@ -13,14 +13,20 @@ class App extends React.Component {
       images: []
     };
   }
-  addLike = index => {
-    let img = this.state.images.slice();
-    img[index].likes += 1;
-    this.setState({
-      ...this.state,
-      images: img
+
+  addLike = id => {
+    const updatedImages = this.state.images.map(img => {
+      console.log("img date in the state", img.date);
+      console.log("passed id inside addLike function", id);
+      if (img.date === id) {
+        return { ...img, likes: img.likes + 1 };
+      } else {
+        return img;
+      }
     });
+    this.setState({ images: updatedImages });
   };
+
   async fetchImages(arrayOfDates) {
     const promises = arrayOfDates.map(date => {
       const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`;
@@ -58,7 +64,7 @@ class App extends React.Component {
           <section>
             <div id="leftpanel">Left panel</div>
             <div className="feed">
-              {this.state.images.map((image, index) => {
+              {this.state.images.map(image => {
                 return (
                   <Element
                     key={image.date}
@@ -69,7 +75,9 @@ class App extends React.Component {
                     description={image.explanation}
                   >
                     <LikeAndComment
-                      onClick={() => this.addLike(index)}
+                      key={image.date}
+                      addLike={this.addLike}
+                      id={image.date}
                       likes={image.likes}
                     />
                   </Element>
