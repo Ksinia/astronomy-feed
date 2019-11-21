@@ -1,0 +1,88 @@
+{
+  "likes": [
+    {
+      "numberOfLikes": 0,
+      "imgDate": "YYYY-MM-DD"
+    },
+    {
+      "numberOfLikes": 4,
+      "imgDate": "2019-11-20"
+    },
+    {
+      "numberOfLikes": 5,
+      "imgDate": "2019-11-19"
+    },
+    {
+      "numberOfLikes": 8,
+      "imgDate": "2019-11-18"
+    },
+    {
+      "numberOfLikes": 6,
+      "imgDate": "2019-11-11"
+    }
+  ],
+  "comments": [
+    {
+      "comments": [],
+      "imgDate": "YYYY-MM-DD"
+    },
+    {
+      "comments": [
+        {
+          "author": "someone",
+          "message": "this is a comment for the picture 2019-11-19"
+        },
+        {
+          "author": "someone else",
+          "message": "this image should have 5 likes"
+        }
+      ],
+      "imgDate": "2019-11-19"
+    },
+    {
+      "comments": [
+        {
+          "author": "someone",
+          "message": "something"
+        }
+      ],
+      "imgDate": "2019-11-16"
+    },
+    {
+      "comments": [
+        {
+          "author": "gecko",
+          "message": "hello"
+        }
+      ],
+      "imgDate": "2019-11-17"
+    },
+    {
+      "comments": [
+        {
+          "author": "gergo",
+          "message": "awesome"
+        }
+      ],
+      "imgDate": "2019-11-18"
+    },
+    {
+      "comments": [
+        {
+          "author": "dfs",
+          "message": "sGFG"
+        }
+      ],
+      "imgDate": "2019-10-22"
+    },
+    {
+      "comments": [
+        {
+          "author": "Ксения",
+          "message": "DWADFGHJMJ,YTRFDCVBHGFD"
+        }
+      ],
+      "imgDate": "2019-11-11"
+    }
+  ]
+}

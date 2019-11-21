@@ -1,3 +1,7 @@
+This project uses the [json-server npm package] (https://www.npmjs.com/package/json-server) on localhost port 3004 with custom routing. Run it with:
+
+json-server --watch db.json --port 3004 --id imgDate
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
