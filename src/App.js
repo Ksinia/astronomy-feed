@@ -16,8 +16,6 @@ class App extends React.Component {
 
   addLike = id => {
     const updatedImages = this.state.images.map(img => {
-      console.log("img date in the state", img.date);
-      console.log("passed id inside addLike function", id);
       if (img.date === id) {
         return { ...img, likes: img.likes + 1 };
       } else {
@@ -40,21 +38,37 @@ class App extends React.Component {
     this.setState({
       images: [
         ...this.state.images,
-        ...data.map(dailyPicture => {
-          return { ...dailyPicture, likes: 0, comments: [] };
-        })
+        ...data
+          .map(dailyPicture => {
+            return { ...dailyPicture, likes: 0, comments: [] };
+          })
+          .filter(data => "url" in data)
       ]
     });
   }
-  componentDidMount() {
+
+  getDates() {
+    let start = null;
+    if (this.state.images.length == 0) {
+      start = moment();
+    } else {
+      const existingDates = this.state.images.map(image =>
+        new Date(image.date.split()).getTime()
+      );
+      const minTimestamp = Math.min.apply(Math, existingDates);
+      start = moment(new Date(minTimestamp));
+    }
+
     const initialDates = Array(5)
       .fill(null)
       .map((date, index) => {
-        return moment()
-          .subtract(index, "days")
-          .format("YYYY-MM-DD");
+        return start.subtract(index, "days").format("YYYY-MM-DD");
       });
-    this.fetchImages(initialDates);
+    return initialDates;
+  }
+
+  componentDidMount() {
+    this.fetchImages(this.getDates());
   }
   render() {
     return (
@@ -83,9 +97,12 @@ class App extends React.Component {
                   </Element>
                 );
               })}
+              <button onClick={() => this.fetchImages(this.getDates())}>
+                More
+              </button>
             </div>
           </section>
-          <footer>Some footer</footer>
+          <footer>Made with sweat and tears in Codaisseur</footer>
         </main>
       </div>
     );
