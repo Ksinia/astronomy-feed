@@ -1,9 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Element from "./components/Element";
-import Page from "./components/Page";
-import LikeAndComment from "./components/LikeAndComment";
+import AstronomyFeedContainer from './components/AstronomyFeedContainer'
 import moment from "moment";
 
 class App extends React.Component {
@@ -150,18 +147,18 @@ class App extends React.Component {
           indexComments == -1
             ? dailyPicture.comments
             : dailyPicture.comments.concat(
-                dataComments[indexComments]["comments"]
-              );
+              dataComments[indexComments]["comments"]
+            );
         return { ...dailyPicture, likes, comments };
       })
     });
   }
-  async fillerAsyncFunction(initialDates) {
+  async initializePage(initialDates) {
     await this.fetchImages(initialDates);
     await this.updateCommentsAndLikes();
   }
   componentDidMount() {
-    this.fillerAsyncFunction(this.getDates());
+    this.initializePage(this.getDates());
     window.addEventListener("scroll", () => {
       if (
         window.scrollY >=
@@ -172,40 +169,16 @@ class App extends React.Component {
     });
   }
   render() {
-    return (
-      <div className="App">
-        <main>
-          <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
-          <section>
-            <div id="leftpanel">Left panel</div>
-            <div id="feed">
-              {this.state.images.map(image => {
-                return (
-                  <Element
-                    key={image.date}
-                    mediaType={image.media_type}
-                    mediasrc={image.url}
-                    title={image.title}
-                    date={image.date}
-                    description={image.explanation}
-                  >
-                    <LikeAndComment
-                      key={image.date}
-                      addLike={this.addLike}
-                      id={image.date}
-                      likes={image.likes}
-                      comments={image.comments}
-                      saveComment={this.saveComment}
-                    />
-                  </Element>
-                );
-              })}
-            </div>
-          </section>
-          <footer>Made with sweat and tears in Codaisseur</footer>
-        </main>
-      </div>
-    );
+    return (<div>
+      <AstronomyFeedContainer
+        images={this.state.images}
+        addLike={this.addLike}
+        saveComment={this.saveComment}
+        fetchImages={this.fetchImages}
+        getDates={this.getDates}
+        updateCommentsAndLikes={this.updateCommentsAndLikes}
+      />
+    </div>)
   }
 }
 
