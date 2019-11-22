@@ -41,5 +41,3 @@ export default function AstronomyFeed(props) {
 // - images: object from the api
 // - addLike callback method
 // - saveComment callback method
-// - fetchImages callback method
-// - getDates callback method
