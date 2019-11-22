@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import moment from "moment";
-import AstronomyFeed from './AstronomyFeed'
-import PropTypes from 'prop-types'
+import AstronomyFeed from "./AstronomyFeed";
+import PropTypes from "prop-types";
 
 export default class AstronomyFeedContainer extends Component {
   static propTypes = {
@@ -10,10 +10,11 @@ export default class AstronomyFeedContainer extends Component {
     saveComment: PropTypes.string.isRequired,
     updateCommentsAndLikes: PropTypes.string.isRequired,
     fetchImages: PropTypes.string.isRequired
-  }
+  };
   componentDidMount() {
     this.initializePage(this.getDates());
-    window.addEventListener("scroll", () => {
+
+    document.addEventListener("scroll", () => {
       if (
         window.scrollY >=
         document.getElementById("feed").clientHeight - window.screen.height
@@ -25,7 +26,7 @@ export default class AstronomyFeedContainer extends Component {
   getDates = () => {
     let start = null;
     if (this.props.images.length == 0) {
-      start = moment();
+      start = moment().add(1, "days");
     } else {
       const existingDates = this.props.images.map(image =>
         new Date(image.date.split()).getTime()
@@ -35,15 +36,16 @@ export default class AstronomyFeedContainer extends Component {
     }
     const initialDates = Array(5)
       .fill(null)
-      .map((date, index) => {
-        return start.subtract(index, "days").format("YYYY-MM-DD");
+      .map(date => {
+        // console.log("initialDates", date);
+        return start.subtract(1, "days").format("YYYY-MM-DD");
       });
     return initialDates;
-  }
-  initializePage = async (initialDates) => {
+  };
+  initializePage = async initialDates => {
     await this.props.fetchImages(initialDates);
     await this.props.updateCommentsAndLikes();
-  }
+  };
   render() {
     return (
       <div>
