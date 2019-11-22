@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 //turned this component into more simple function component
 //that just returns what should be rendered
