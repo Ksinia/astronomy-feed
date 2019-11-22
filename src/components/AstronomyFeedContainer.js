@@ -5,11 +5,15 @@ import PropTypes from "prop-types";
 
 export default class AstronomyFeedContainer extends Component {
   static propTypes = {
-    images: PropTypes.string.isRequired,
-    addLike: PropTypes.string.isRequired,
-    saveComment: PropTypes.string.isRequired,
-    updateCommentsAndLikes: PropTypes.string.isRequired,
-    fetchImages: PropTypes.string.isRequired
+    images: PropTypes.array.isRequired,
+    addLike: PropTypes.func.isRequired,
+    saveComment: PropTypes.func.isRequired,
+    updateCommentsAndLikes: PropTypes.func.isRequired,
+    fetchImages: PropTypes.func.isRequired
+  };
+  state = {
+    isSortedByDate: true,
+    buttonText: "Sorted by date"
   };
   componentDidMount() {
     this.initializePage(this.getDates());
@@ -23,6 +27,21 @@ export default class AstronomyFeedContainer extends Component {
       }
     });
   }
+  sorting = () => {
+    if (this.state.isSortedByDate) {
+      this.props.images.sort((a, b) => b.likes - a.likes);
+    } else {
+      this.props.images.sort(
+        (a, b) => moment(b.date).valueOf() - moment(a.date).valueOf()
+      );
+    }
+    this.setState({
+      isSortedByDate: !this.state.isSortedByDate,
+      buttonText: this.state.isSortedByDate
+        ? "Sorted by Likes"
+        : "Sorted by date"
+    });
+  };
   getDates = () => {
     let start = null;
     if (this.props.images.length == 0) {
@@ -53,6 +72,8 @@ export default class AstronomyFeedContainer extends Component {
           images={this.props.images}
           addLike={this.props.addLike}
           saveComment={this.props.saveComment}
+          sorting={this.sorting}
+          buttonText={this.state.buttonText}
         />
       </div>
     );

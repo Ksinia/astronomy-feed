@@ -14,15 +14,17 @@ export default class Element extends Component {
         <h3 className="title">{this.props.title}</h3>
         <div className="pictureAndText">
           {this.props.mediaType === "image" ? (
-            <img className="picture" src={this.props.mediasrc}></img>
+            <img className="picture" src={this.props.mediasrc} alt="astronomy"></img>
           ) : (
-            <iframe
-              className="picture"
-              width="420"
-              height="315"
-              src={this.props.mediasrc}
-            ></iframe>
-          )}
+              <iframe
+                title={this.props.title}
+                className="picture"
+                width="420"
+                height="315"
+                src={this.props.mediasrc}
+                alt="video"
+              ></iframe>
+            )}
           <p className="description">{this.props.description}</p>
         </div>
         <div className="likes">{this.props.children}</div>
