@@ -1,7 +1,10 @@
 import React from "react";
 import "./App.css";
-import AstronomyFeedContainer from './components/AstronomyFeedContainer'
-import { Route } from 'react-router-dom'
+import AstronomyFeedContainer from "./components/AstronomyFeedContainer";
+import { Route } from "react-router-dom";
+
+import SinglePostPageContainer from "./components/SinglePostPageContainer";
+import moment from "moment";
 
 // https://api.nasa.gov/planetary/apod\?api_key\=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg\&start_date\=2019-11-11\&end_date\=2019-11-15
 
@@ -86,7 +89,7 @@ class App extends React.Component {
     }
   };
 
-  fetchImages = async (arrayOfDates) => {
+  fetchImages = async arrayOfDates => {
     const promises = arrayOfDates.map(date => {
       const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`;
       return fetch(url).then(res => res.json());
@@ -102,7 +105,7 @@ class App extends React.Component {
           .filter(data => "url" in data)
       ]
     });
-  }
+  };
   updateCommentsAndLikes = async () => {
     const resLikes = await fetch("http://localhost:3004/likes");
     const dataLikes = await resLikes.json();
@@ -125,22 +128,27 @@ class App extends React.Component {
           indexComments === -1
             ? dailyPicture.comments
             : dailyPicture.comments.concat(
-              dataComments[indexComments]["comments"]
-            );
+                dataComments[indexComments]["comments"]
+              );
         return { ...dailyPicture, likes, comments };
       })
     });
-  }
+  };
   render() {
-    return (<div>
-      <Route exact path="/"><AstronomyFeedContainer
-        images={this.state.images}
-        addLike={this.addLike}
-        saveComment={this.saveComment}
-        fetchImages={this.fetchImages}
-        updateCommentsAndLikes={this.updateCommentsAndLikes}
-      /></Route>
-    </div>)
+    return (
+      <div>
+        <Route exact path="/">
+          <AstronomyFeedContainer
+            images={this.state.images}
+            addLike={this.addLike}
+            saveComment={this.saveComment}
+            fetchImages={this.fetchImages}
+            updateCommentsAndLikes={this.updateCommentsAndLikes}
+          />
+        </Route>
+        <Route path="/:date" component={SinglePostPageContainer} />
+      </div>
+    );
   }
 }
 
