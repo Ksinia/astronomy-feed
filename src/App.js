@@ -162,6 +162,14 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.fillerAsyncFunction(this.getDates());
+    window.addEventListener("scroll", () => {
+      if (
+        window.scrollY >=
+        document.getElementById("feed").clientHeight - window.screen.height
+      ) {
+        this.fetchImages(this.getDates());
+      }
+    });
   }
   render() {
     return (
@@ -170,7 +178,7 @@ class App extends React.Component {
           <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
           <section>
             <div id="leftpanel">Left panel</div>
-            <div className="feed">
+            <div id="feed">
               {this.state.images.map(image => {
                 return (
                   <Element
@@ -192,9 +200,6 @@ class App extends React.Component {
                   </Element>
                 );
               })}
-              <button onClick={() => this.fetchImages(this.getDates())}>
-                More
-              </button>
             </div>
           </section>
           <footer>Made with sweat and tears in Codaisseur</footer>
