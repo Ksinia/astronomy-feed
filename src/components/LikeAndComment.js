@@ -39,7 +39,6 @@ export default class LikeAndComment extends Component {
     this.props.addLike(this.props.id);
   };
   render() {
-    console.log("passed id in the render function", this.props.id);
     return (
       <div className="reactions">
         <div className="likesAndAdd">

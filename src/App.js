@@ -92,7 +92,6 @@ class App extends React.Component {
       return fetch(url).then(res => res.json());
     });
     const data = await Promise.all(promises);
-    console.log(data);
     this.setState({
       images: [
         ...this.state.images,

@@ -11,6 +11,10 @@ export default class AstronomyFeedContainer extends Component {
     updateCommentsAndLikes: PropTypes.string.isRequired,
     fetchImages: PropTypes.string.isRequired
   }
+  state = {
+    isSortedByDate: true,
+    buttonText: 'Sorted by date'
+  }
   componentDidMount() {
     this.initializePage(this.getDates());
     window.addEventListener("scroll", () => {
@@ -21,6 +25,17 @@ export default class AstronomyFeedContainer extends Component {
         this.props.fetchImages(this.getDates());
       }
     });
+  }
+  sorting = () => {
+    if (this.state.isSortedByDate) {
+      this.props.images.sort((a, b) => b.likes - a.likes)
+    } else {
+      this.props.images.sort((a, b) => moment(b.date).valueOf() - moment(a.date).valueOf())
+    }
+    this.setState({
+      isSortedByDate: !this.state.isSortedByDate,
+      buttonText: (this.state.isSortedByDate ? 'Sorted by Likes' : 'Sorted by date')
+    })
   }
   getDates = () => {
     let start = null;
@@ -51,6 +66,8 @@ export default class AstronomyFeedContainer extends Component {
           images={this.props.images}
           addLike={this.props.addLike}
           saveComment={this.props.saveComment}
+          sorting={this.sorting}
+          buttonText={this.state.buttonText}
         />
       </div>
     );
