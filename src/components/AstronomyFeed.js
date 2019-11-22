@@ -6,8 +6,12 @@ import LikeAndComment from './LikeAndComment'
 export default function AstronomyFeed(props) {
   return (
     <div className='App'>
-      <main>
-        <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
+      <main><div id="mainheader">
+        <button onClick={() => props.sorting()}>
+          {props.buttonText}
+        </button>
+        <h2>Gergo &amp; Ksenia Astronomy Feed</h2>
+      </div>
         <section>
           <div id="leftpanel">Left panel</div>
           <div id="feed">
