@@ -159,6 +159,14 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.initializePage(this.getDates());
+    window.addEventListener("scroll", () => {
+      if (
+        window.scrollY >=
+        document.getElementById("feed").clientHeight - window.screen.height
+      ) {
+        this.fetchImages(this.getDates());
+      }
+    });
   }
   render() {
     return (<div>

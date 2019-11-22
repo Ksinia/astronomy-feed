@@ -10,7 +10,7 @@ export default function AstronomyFeed(props) {
         <h2 id="mainheader">Gergo &amp; Ksenia Astronomy Feed</h2>
         <section>
           <div id="leftpanel">Left panel</div>
-          <div className="feed">
+          <div id="feed">
             {props.images.map(image => {
               return (<Element
                 key={image.date}
@@ -30,9 +30,6 @@ export default function AstronomyFeed(props) {
                 />
               </Element>)
             })}
-            <button onClick={() => this.fetchImages(this.getDates())}>
-              More
-            </button>
           </div>
         </section>
       </main>

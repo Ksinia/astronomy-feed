@@ -21,7 +21,7 @@
       "imgDate": "2019-11-11"
     },
     {
-      "numberOfLikes": 8,
+      "numberOfLikes": 11,
       "imgDate": "2019-11-22"
     },
     {
@@ -88,6 +88,10 @@
         {
           "author": "Ксения",
           "message": "DWADFGHJMJ,YTRFDCVBHGFD"
+        },
+        {
+          "author": "Гуляева Ксения Юрьевна",
+          "message": "cxbnbm,mhgfdxcvn"
         }
       ],
       "imgDate": "2019-11-11"
@@ -97,6 +101,10 @@
         {
           "author": "gergo",
           "message": "today is friday and this image is really cool!"
+        },
+        {
+          "author": "someone",
+          "message": "another comment"
         }
       ],
       "imgDate": "2019-11-22"
