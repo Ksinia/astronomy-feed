@@ -25,7 +25,7 @@
       "imgDate": "2019-11-22"
     },
     {
-      "numberOfLikes": 5,
+      "numberOfLikes": 7,
       "imgDate": "2019-11-21"
     }
   ],
@@ -114,6 +114,10 @@
         {
           "author": "gergo",
           "message": "new  comment"
+        },
+        {
+          "author": "hrubog",
+          "message": "another new comment"
         }
       ],
       "imgDate": "2019-11-21"

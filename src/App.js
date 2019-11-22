@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.css";
 import AstronomyFeedContainer from './components/AstronomyFeedContainer'
-import moment from "moment";
+import { Route } from 'react-router-dom'
+
+// https://api.nasa.gov/planetary/apod\?api_key\=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg\&start_date\=2019-11-11\&end_date\=2019-11-15
 
 class App extends React.Component {
   constructor() {
@@ -84,14 +86,11 @@ class App extends React.Component {
     }
   };
 
-  async fetchImages(arrayOfDates) {
+  fetchImages = async (arrayOfDates) => {
     const promises = arrayOfDates.map(date => {
       const url = `https://api.nasa.gov/planetary/apod?api_key=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg&date=${date}`;
       return fetch(url).then(res => res.json());
     });
-
-    // https://api.nasa.gov/planetary/apod\?api_key\=XOVbZ8gIyfZTNb0PJgmggUPqwgQVM319jG35pZjg\&start_date\=2019-11-11\&end_date\=2019-11-15
-
     const data = await Promise.all(promises);
     console.log(data);
     this.setState({
@@ -105,27 +104,7 @@ class App extends React.Component {
       ]
     });
   }
-
-  getDates() {
-    let start = null;
-    if (this.state.images.length == 0) {
-      start = moment();
-    } else {
-      const existingDates = this.state.images.map(image =>
-        new Date(image.date.split()).getTime()
-      );
-      const minTimestamp = Math.min.apply(Math, existingDates);
-      start = moment(new Date(minTimestamp));
-    }
-    const initialDates = Array(5)
-      .fill(null)
-      .map((date, index) => {
-        return start.subtract(index, "days").format("YYYY-MM-DD");
-      });
-    return initialDates;
-  }
-
-  async updateCommentsAndLikes() {
+  updateCommentsAndLikes = async () => {
     const resLikes = await fetch("http://localhost:3004/likes");
     const dataLikes = await resLikes.json();
     const resComments = await fetch("http://localhost:3004/comments");
@@ -153,31 +132,15 @@ class App extends React.Component {
       })
     });
   }
-  async initializePage(initialDates) {
-    await this.fetchImages(initialDates);
-    await this.updateCommentsAndLikes();
-  }
-  componentDidMount() {
-    this.initializePage(this.getDates());
-    window.addEventListener("scroll", () => {
-      if (
-        window.scrollY >=
-        document.getElementById("feed").clientHeight - window.screen.height
-      ) {
-        this.fetchImages(this.getDates());
-      }
-    });
-  }
   render() {
     return (<div>
-      <AstronomyFeedContainer
+      <Route exact path="/"><AstronomyFeedContainer
         images={this.state.images}
         addLike={this.addLike}
         saveComment={this.saveComment}
         fetchImages={this.fetchImages}
-        getDates={this.getDates}
         updateCommentsAndLikes={this.updateCommentsAndLikes}
-      />
+      /></Route>
     </div>)
   }
 }
