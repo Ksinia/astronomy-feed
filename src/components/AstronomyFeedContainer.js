@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 
 export default class AstronomyFeedContainer extends Component {
   static propTypes = {
-    images: PropTypes.string.isRequired,
-    addLike: PropTypes.string.isRequired,
-    saveComment: PropTypes.string.isRequired,
-    updateCommentsAndLikes: PropTypes.string.isRequired,
-    fetchImages: PropTypes.string.isRequired
+    images: PropTypes.array.isRequired,
+    addLike: PropTypes.func.isRequired,
+    saveComment: PropTypes.func.isRequired,
+    updateCommentsAndLikes: PropTypes.func.isRequired,
+    fetchImages: PropTypes.func.isRequired
   }
   state = {
     isSortedByDate: true,
@@ -39,7 +39,7 @@ export default class AstronomyFeedContainer extends Component {
   }
   getDates = () => {
     let start = null;
-    if (this.props.images.length == 0) {
+    if (this.props.images.length === 0) {
       start = moment();
     } else {
       const existingDates = this.props.images.map(image =>

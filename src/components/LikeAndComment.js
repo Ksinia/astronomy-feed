@@ -51,10 +51,10 @@ export default class LikeAndComment extends Component {
           <div className="comments">
             <h4>Comments:</h4>
             {this.props.comments.map(comment => {
-              return <Comment name={comment.author} msg={comment.message} />;
+              return <Comment name={comment.author} msg={comment.message} key={comment.message} />;
             })}
             {this.state.comments.map(comment => {
-              return <Comment name={comment.name} msg={comment.msg} />;
+              return <Comment name={comment.name} msg={comment.msg} key={comment.msg} />;
             })}
           </div>
 

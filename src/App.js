@@ -118,11 +118,11 @@ class App extends React.Component {
         const indexLikes = dateArrayLikes.indexOf(dailyPicture["date"]);
         const indexComments = dateArrayComments.indexOf(dailyPicture["date"]);
         const likes =
-          indexLikes == -1
+          indexLikes === -1
             ? dailyPicture.likes
             : dataLikes[indexLikes]["numberOfLikes"];
         const comments =
-          indexComments == -1
+          indexComments === -1
             ? dailyPicture.comments
             : dailyPicture.comments.concat(
               dataComments[indexComments]["comments"]
